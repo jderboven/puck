@@ -1,5 +1,10 @@
-import packageJson from "./package.json" assert { type: "json" };
+import { readFileSync } from "node:fs";
 import nextra from "nextra";
+
+// Import assertions (`assert { type: "json" }`) were removed in Node.js 22.
+const packageJson = JSON.parse(
+  readFileSync(new URL("./package.json", import.meta.url), "utf8")
+);
 
 const withNextra = nextra({
   theme: "nextra-theme-docs",
